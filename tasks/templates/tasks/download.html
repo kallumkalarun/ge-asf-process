@@ -1,0 +1,28 @@
+{% extends 'layout-login.html' %}
+
+{% block title %}
+Download
+{% endblock %}
+
+{% block content %}
+
+
+<form method="post" action="{% url 'tasks:download' %}">
+    <h3>Download Files</h3>
+    {% csrf_token %}
+    <br><br>
+    <ul>
+        {% for file in request.session.uploaded_files %}
+            <li>{{ file }}</li>
+        {% endfor %}
+    </ul>
+    
+    <br><br>
+
+    <button type="submit">Download</button>
+    
+    <br><br>
+    <a href="{% url 'home'%}">Exit</a>
+</form>
+
+{% endblock %}

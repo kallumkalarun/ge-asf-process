@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-xxgl28)bf6g!cugahd$q5xfrjf_gj39^6amd07v5kmz8eo7@iy
 DEBUG = False
 # DEBUG = False
 
-ALLOWED_HOSTS = ["localhost","127.0.0.1"]
+# ALLOWED_HOSTS = ["localhost","127.0.0.1"]
+ALLOWED_HOSTS = ["ge-asf-process.onrender.com","localhost","127.0.0.1"]
 
 
 # Application definition

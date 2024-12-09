@@ -190,14 +190,14 @@
                                  <i class="ri-lock-line"></i> Login
                               </a>                          
                            </li>
-
+                           {% else %}
                            <li>
                               <a href="{% url 'users:register' %}" class="dropdown__link">
                                  <i class="ri-registered-line"></i> Register
                               </a>                          
                            </li>
 
-                           {% else %}
+                           
                           
                            <li>
                               <a href="#" class="dropdown__link">

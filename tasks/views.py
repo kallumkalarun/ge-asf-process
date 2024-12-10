@@ -20,7 +20,7 @@ def remupc_view(request):
         second_files = request.FILES.getlist('second_file[]')
 
         if not first_file or not second_files:
-            return render(request, 'remupc.html', {"error": "Please select both UPC Excel data  and Tag files."})
+            return render(request, 'tasks/remupc.html', {"error": "Please select both UPC Excel data  and Tag files."})
 
         # Create a temporary dump folder in the project base directory
         dump_folder = os.path.join(settings.MEDIA_ROOT, 'dump')
@@ -32,10 +32,15 @@ def remupc_view(request):
         firstfilename = fs.save(first_file.name, first_file)  # Save the file
         firstfile_url = os.path.join(dump_folder, firstfilename)# Get the file URL
  
-        # Process Excel file
-        arrUPC_data = getUPCFromExcel(firstfile_url) 
-
-
+        extension = os.path.splitext(firstfilename)[1]
+        if extension == ".xlsx":
+            # Process Excel file
+            arrUPC_data = getUPCFromExcel(firstfile_url) 
+        else:
+            # Cleanup: Delete all files in the dump folder after download
+            shutil.rmtree(dump_folder, ignore_errors=True)
+            return render(request, 'tasks/remupc.html', {"error": "Please select UPC list in 'xlsx' format."})
+                 
 
 
         # Process and update each flat file
@@ -46,8 +51,11 @@ def remupc_view(request):
             secondfile_url = os.path.join(dump_folder, second_filename)
 
             # Process each file
-            deleteMatchingUPCRow(arrUPC_data, secondfile_url)
-            tag_files.append(second_filename)
+            headflag = deleteMatchingUPCRow(arrUPC_data, secondfile_url)
+            if headflag != True:
+                os.remove(secondfile_url)
+            else:
+                tag_files.append(second_filename)
 
         # Store the file names in session to pass to the next page
         request.session['uploaded_files'] = tag_files 
@@ -71,12 +79,15 @@ def getUPCFromExcel(excel_file):
                 if column_name == "UPC":
                     for i, cell in enumerate(column):
                         if i != 0:
+                            row = cell.row
+                            if eachSheet.row_dimensions[row].hidden:
+                                continue
                             upcstr = str(cell.value)
                             upcstr = upcstr.replace("-", "")
                             if upcstr != None:
                                 arrUPC.append(upcstr)
 
-    return arrUPC  # This will be a list, dictionary, or other structure
+    return arrUPC  
 
 def deleteMatchingUPCRow(arrUPC_data, flat_file):
     tagFilePath = flat_file
@@ -86,18 +97,24 @@ def deleteMatchingUPCRow(arrUPC_data, flat_file):
         sfile.seek(0)
         sfile.truncate()
 
+    headflag = False
     sfile = open(tagFilePath, 'w')
     for line in data:
         start = 45  # upc 45 - 57 (13 digits)
         end = 58  
-            
+        headval = line[116:118] 
+
         for exlUPC in arrUPC_data:
             index = line.find(exlUPC, start, end)
             if index > 0:
                 break
 
         if index == -1:
+            if headval != '00':
+                headflag = True
             sfile.write(line)
+
+    return headflag
 
     
 

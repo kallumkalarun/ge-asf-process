@@ -8,12 +8,13 @@
 <form method="post" action="{% url 'tasks:rem-upc' %}" enctype="multipart/form-data">
     <h3>Remove UPC</h3>
     {% csrf_token %}
-
+    <br>
+    
     {% if error %}
     <p style="color: red;">{{ error }}</p>
     {% endif %}
 
-    <br><br>
+    <br>
     <label for="first_file">Select excel UPC file:</label>
     <input type="file" id="first_file" name="first_file" required>
     <br><br>

@@ -48,8 +48,9 @@
                         <i class="ri-home-heart-line"></i>&nbsp;Home
                      </a></li>
                      
-                    {% if user.is_authenticated %}
+                  {% if user.is_authenticated %}
                      <!--=============== DROPDOWN 1 ===============-->
+                     {% if user.is_superuser or 'GRP_BW' in request.session.user_groups or 'GRP_AL' in request.session.user_groups %}    
                      <li class="dropdown__item">
                         <div class="nav__link">
                            Bin Work <i class="ri-arrow-down-s-line dropdown__arrow"></i>
@@ -70,9 +71,10 @@
 
                         </ul>
                      </li>
-
+                     {% endif %}
 
                    <!--=============== DROPDOWN 1 ===============-->
+                   {% if user.is_superuser or 'GRP_DC' in request.session.user_groups or 'GRP_AL' in request.session.user_groups %}    
                    <li class="dropdown__item">
                      <div class="nav__link">
                         DI/CP <i class="ri-arrow-down-s-line dropdown__arrow"></i>
@@ -117,64 +119,90 @@
                               </li>
                            </ul>
                         </li>
+
+                        <!--=============== DROPDOWN SUBMENU ===============-->
+                        <li class="dropdown__subitem">
+                           <div class="dropdown__link">
+                              <i class="ri-price-tag-2-line"></i> Reports <i class="ri-add-line dropdown__add"></i>
+                           </div>
+
+                           <ul class="dropdown__submenu">
+                              <li>
+                                 <a href="{% url 'tasks:reports' %}" class="dropdown__sublink">
+                                    <i class="ri-price-tag-2-line"></i> Report 1
+                                 </a>
+                              </li>
+      
+                              <li>
+                                 <a href="#" class="dropdown__sublink">
+                                    <i class="ri-price-tag-2-line"></i> Report 2
+                                 </a>
+                              </li>
+      
+                           </ul>
+                        </li>
+
                      </ul>
                   </li>
-
+                  {% endif %}
 
                    <!--=============== DROPDOWN 1 ===============-->
-                     <li class="dropdown__item">
-                        <div class="nav__link">
-                           PER/FIN <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-                        </div>
-   
-                        <ul class="dropdown__menu">
-                           <li>
-                              <a href="#" class="dropdown__link">
-                                 <i class="ri-shopping-cart-line"></i> Perishable
-                              </a>                          
-                           </li>
-   
-                           <li>
-                              <a href="#" class="dropdown__link">
-                                 <i class="ri-exchange-dollar-line"></i> Financial
-                              </a>
-                           </li>
+                   {% if user.is_superuser or 'GRP_PF' in request.session.user_groups or 'GRP_AL' in request.session.user_groups %}    
+                  <li class="dropdown__item">
+                     <div class="nav__link">
+                        PER/FIN <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                     </div>
 
-                           <li>
-                              <a href="#" class="dropdown__link">
-                                 <i class="ri-cash-line"></i> Pricing
-                              </a>
-                           </li>
-   
-                        </ul>
-                     </li>
+                     <ul class="dropdown__menu">
+                        <li>
+                           <a href="#" class="dropdown__link">
+                              <i class="ri-shopping-cart-line"></i> Perishable
+                           </a>                          
+                        </li>
 
+                        <li>
+                           <a href="#" class="dropdown__link">
+                              <i class="ri-exchange-dollar-line"></i> Financial
+                           </a>
+                        </li>
 
-                     <!--=============== DROPDOWN 1 ===============-->
-                     <li class="dropdown__item">
-                        <div class="nav__link">
-                           <i class="ri-printer-cloud-line"></i> 
-                           Print Team 
-                           <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-                        </div>
-   
-                        <ul class="dropdown__menu">
-                           <li>
-                              <a href="#" class="dropdown__link">
-                                 <i class="ri-printer-line"></i> General
-                              </a>                          
-                           </li>
-   
-                           <li>
-                              <a href= "{% url 'tasks:rem-upc' %}" class="dropdown__link">
-                                 <i class="ri-delete-row"></i> Remove UPC
-                              </a>
-                           </li>
+                        <li>
+                           <a href="#" class="dropdown__link">
+                              <i class="ri-cash-line"></i> Pricing
+                           </a>
+                        </li>
 
-                        </ul>
-                     </li>
+                     </ul>
+                  </li>
+                  {% endif %}
 
-                     {% endif %}
+                  <!--=============== DROPDOWN 1 ===============-->
+                  {% if user.is_superuser or 'GRP_PT' in request.session.user_groups or 'GRP_AL' in request.session.user_groups %}  
+                  <li class="dropdown__item">
+                     <div class="nav__link">
+                        <i class="ri-printer-cloud-line"></i> 
+                        Print Team 
+                        <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                     </div>
+
+                     <ul class="dropdown__menu">
+                        <li>
+                           <a href="#" class="dropdown__link">
+                              <i class="ri-printer-line"></i> General
+                           </a>                          
+                        </li>
+
+                        <li>
+                           <a href= "{% url 'tasks:rem-upc' %}" class="dropdown__link">
+                              <i class="ri-delete-row"></i> Remove UPC
+                           </a>
+                        </li>
+
+                     </ul>
+                  </li>
+                  {% endif %}
+
+               {% endif %}
                      
                      <!--=============== DROPDOWN 2 ===============-->
                      <li class="dropdown__item">
@@ -191,12 +219,14 @@
                               </a>                          
                            </li>
                            {% else %}
-                           <li>
-                              <a href="{% url 'users:register' %}" class="dropdown__link">
-                                 <i class="ri-registered-line"></i> Register
-                              </a>                          
-                           </li>
 
+                              {% if user.is_superuser or 'GRP_RU' in request.session.user_groups %}                             
+                              <li>
+                                 <a href="{% url 'users:register' %}" class="dropdown__link">
+                                    <i class="ri-registered-line"></i> Register
+                                 </a>                          
+                              </li>
+                              {% endif %}
                            
                           
                            <li>

@@ -1,0 +1,109 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+
+.container-home {
+    display: flex;
+    flex-direction: column;
+    height: 85vh; /* 100% of viewport height */
+    gap: 0.5rem;  
+  }
+  
+ 
+
+.home-box {
+
+border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border */
+border-radius: 5px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Outer shadow */
+box-shadow: inset 0 0 10px rgba(167, 153, 153, 0.2); /* Inner glow */
+
+flex: 1; 
+border-radius: 1rem; 
+
+
+/* Inner glow effect (may require browser support) */
+/* box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);  */
+
+/* background-color: aliceblue; 
+background-image: url('./img/ge_bg.jpg'), linear-gradient(to left, aliceblue, #fff); */
+
+background-image: url('../img/ge_bg.png'), linear-gradient(to right, transparent, #eceaea);
+background-size: contain;
+/* background-size: 60%; */
+background-position: left center; 
+background-repeat: no-repeat;
+
+
+} 
+
+h4 {
+  font-size: 200%;
+  text-align: center;
+  color:rgba(61, 58, 58, 0.39);
+  text-shadow: 2px 2px 5px #343534bd;
+}
+
+.home-quote {
+  display: flex;
+  justify-content:flex-end;
+  margin-top: 16%;
+  margin-right: 10%;
+}
+
+
+
+
+/************* REPORT PAGE ****************************/
+
+
+
+.container-report {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* 100% of viewport height */
+  gap: 1rem;
+
+
+}
+
+
+.top-box, .bottom-box {
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border */
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Outer shadow */
+  box-shadow: inset 0 0 10px rgba(167, 153, 153, 0.2); /* Inner glow */
+}
+
+.top-box {
+flex: 0 0 15%; 
+border-radius: 1rem;
+/* background-color: #e0d0d0;  */
+/* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+
+background-color: aliceblue; 
+background-image: linear-gradient(hsl(208, 100%, 97%), #ffffff);
+
+box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2); 
+
+}
+
+.bottom-box {
+flex: 1; 
+border-radius: 1rem; 
+
+background-color: aliceblue; 
+background-image: linear-gradient(hsl(208, 100%, 97%),  #ffffff);
+
+box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2); 
+
+} 

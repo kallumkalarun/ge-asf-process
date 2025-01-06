@@ -84,7 +84,7 @@ def getUPCFromExcel(excel_file):
                                 continue
                             upcstr = str(cell.value)
                             upcstr = upcstr.replace("-", "")
-                            if upcstr != None:
+                            if upcstr and upcstr != 'None':
                                 arrUPC.append(upcstr)
 
     return arrUPC  
@@ -158,4 +158,21 @@ def download_files(request):
     else:
         return render(request, "tasks/download.html", {'disable_menu' : True})
 
-  
+
+
+
+@login_required(login_url="/users/login/")
+def reports_view(request):
+    if request.method == "POST":
+
+
+
+
+
+
+
+
+
+        return redirect('tasks:reports')  # Redirect to download page
+    else:
+        return render(request, "tasks/reports.html")

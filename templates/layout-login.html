@@ -196,13 +196,16 @@
                               </a>                          
                            </li>
 
-                           <li>
-                              <a href="{% url 'users:register' %}" class="dropdown__link">
-                                 <i class="ri-registered-line"></i> Register
-                              </a>                          
-                           </li>
-
                            {% else %}
+
+                              {% if user.is_superuser or 'GRP_RU' in request.session.user_groups %}                             
+                              <li>
+                                 <a href="{% url 'users:register' %}" class="dropdown__link">
+                                    <i class="ri-registered-line"></i> Register
+                                 </a>                          
+                              </li>
+                              {% endif %}
+
                           
                            <li>
                               <a href="#" class="dropdown__link">

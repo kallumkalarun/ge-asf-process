@@ -1,11 +1,25 @@
 {% extends 'layout.html' %}
-
+{% load static %}
 {% block title %}
-GE ASF Process
+  Reports
 {% endblock %}
 
 {% block content %}
-    <!--  <h1>SWAMI SARANAM</h1> -->
-   <!-- <p>Check out my <a href="/about">About</a> page.</p>-->
+<link rel="stylesheet" href="{% static 'css/body-style.css' %}">
 
+  <div class="container-home">
+    <div class="home-box">
+    
+        <div class = "home-quote">
+        <p>
+            <h4>&#10077;&nbsp;Safety Begins With You <br>
+            Respect the Risk<br>
+            See It... Own It...<br>
+            Step Up, Speak Out, and Listen&nbsp;&#10078;</h4>
+        </p>
+        </div>
+
+      {% comment %} <h1>Report Viewer</h1> {% endcomment %}
+    </div>
+  </div>
 {% endblock %}

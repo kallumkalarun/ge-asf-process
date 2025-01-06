@@ -6,5 +6,6 @@ app_name = 'tasks'
 urlpatterns = [
     path('rem-upc/', views.remupc_view, name="rem-upc"),
     path('download/', views.download_files, name='download'),
+    path('reports/', views.reports_view, name='reports'),
 
 ]
